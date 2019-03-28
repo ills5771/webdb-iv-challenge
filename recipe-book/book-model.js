@@ -5,7 +5,8 @@ module.exports = {
   getDishes,
   addDish,
   getRecipes,
-  getRecipesById
+  getRecipesById,
+  addRecipe
 };
 
 function getDishes() {
@@ -32,4 +33,11 @@ function getRecipesById(id) {
   return db("recipes")
     .where({ id })
     .first();
+}
+function addRecipe(recipe) {
+  return db("recipes")
+    .insert(recipe)
+    .then(ids => {
+      return getRecipesById(ids[0]);
+    });
 }

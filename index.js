@@ -55,6 +55,16 @@ server.get("/api/recipes/:id", async (req, res) => {
     res.status(500).json(error);
   }
 });
+server.post("/api/recipes", async (req, res) => {
+  try {
+    const recipe = await RecipeBook.addRecipe(req.body);
+    res.status(201).json(recipe);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error adding recipe"
+    });
+  }
+});
 
 const port = process.env.PORT || 7000;
 server.listen(port, () =>
