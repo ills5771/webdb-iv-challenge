@@ -6,14 +6,6 @@ exports.up = function(knex) {
       .string("name", 128)
       .notNullable()
       .unique();
-
-    tbl
-      .integer("recipe_id")
-      .unsigned()
-      .references("id")
-      .inTable("recipes")
-      .onDelete("CASCADE")
-      .onUpdate("CASCADE");
   });
 };
 
