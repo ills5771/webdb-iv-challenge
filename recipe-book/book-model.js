@@ -1,4 +1,4 @@
-const db = require("../data/dbConfig.js");
+const db = require("../data/dbConfig");
 
 module.exports = {
   find,
@@ -6,11 +6,11 @@ module.exports = {
 };
 
 function find() {
-  return db("roles");
+  return db("dishes");
 }
 
 function findById(id) {
-  return db("roles")
+  return db("dishes")
     .where({ id })
     .first();
 }
