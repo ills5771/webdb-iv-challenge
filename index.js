@@ -11,7 +11,7 @@ server.use(express.json());
 
 server.get("/api/dishes", async (req, res) => {
   try {
-    const dishes = await RecipeBook.find();
+    const dishes = await RecipeBook.getDishes();
     res.status(200).json(dishes);
   } catch (error) {
     res.status(500).json(error);
@@ -20,8 +20,37 @@ server.get("/api/dishes", async (req, res) => {
 
 server.get("/api/dishes/:id", async (req, res) => {
   try {
-    const dish = await RecipeBook.findById(req.params.id);
+    const dish = await RecipeBook.getDish(req.params.id);
     res.status(200).json(dish);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+server.post("/api/dishes", async (req, res) => {
+  try {
+    const dish = await RecipeBook.addDish(req.body);
+    res.status(201).json(dish);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error adding dish"
+    });
+  }
+});
+
+server.get("/api/recipes", async (req, res) => {
+  try {
+    const recipes = await RecipeBook.getRecipes();
+    res.status(200).json(recipes);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+server.get("/api/recipes/:id", async (req, res) => {
+  try {
+    const recipe = await RecipeBook.getRecipesById(req.params.id);
+    res.status(200).json(recipe);
   } catch (error) {
     res.status(500).json(error);
   }
